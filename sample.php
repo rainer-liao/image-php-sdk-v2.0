@@ -3,10 +3,10 @@
 require_once __DIR__ . '/index.php';
 use QcloudImage\CIClient;
 
-$appid = 'YOUR_APPID';
-$secretId = 'YOUR_SECRETID';
-$secretKey = 'YOUR_SECRETKEY';
-$bucket = 'YOUR_BUCKET';
+$appid = '1251668577';
+$secretId = 'AKIDWtTCBYjM5OwLB9CAwA1Qb2ThTSUjfGFO';
+$secretKey = 'FZjRSu0mJ9YJijVXXY57MAdCl4uylaA7';
+$bucket = '0111';
 
 $client = new CIClient($appid, $secretId, $secretKey, $bucket);
 $client->setTimeout(30);
@@ -135,8 +135,11 @@ var_dump ($client->faceIdCardCompare('330782198802084329', '季锦锦', array('b
 //活体检测第一步：获取唇语（验证码）
 $obj = $client->faceLiveGetFour();
 var_dump ($obj);
+$validate_data = "";
 $faceObj = json_decode($obj, true);
-$validate_data = $faceObj['data']['validate_data'];
+if (isset($faceObj['data']['validate_data'])) {
+	$validate_data = $faceObj['data']['validate_data'];
+}
 //活体检测第二步：检测
 var_dump ($client->faceLiveDetectFour($validate_data, array('file'=>'F:\pic\ZOE_0171.mp4'), False, array('F:\pic\idcard.jpg')));
 //活体检测第二步：检测--对比指定身份信息
