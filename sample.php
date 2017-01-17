@@ -3,10 +3,10 @@
 require_once __DIR__ . '/index.php';
 use QcloudImage\CIClient;
 
-$appid = '1251668577';
-$secretId = 'AKIDWtTCBYjM5OwLB9CAwA1Qb2ThTSUjfGFO';
-$secretKey = 'FZjRSu0mJ9YJijVXXY57MAdCl4uylaA7';
-$bucket = '0111';
+$appid = 'YOUR_APPID';
+$secretId = 'YOUR_SECRETID';
+$secretKey = 'YOUR_SECRETKEY';
+$bucket = 'YOUR_BUCKET';
 
 $client = new CIClient($appid, $secretId, $secretKey, $bucket);
 $client->setTimeout(30);
