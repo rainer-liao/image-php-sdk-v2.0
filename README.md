@@ -189,6 +189,9 @@
 	var_dump ($client->faceCompare(array('file'=>'F:\pic\yang.jpg'), array('file'=>'F:\pic\yang2.jpg')));
 ```
 	
+		
+#### 3.3 人脸核身
+
 ##### 身份证识别对比
 
 ```php
@@ -199,9 +202,8 @@
 	//身份证文件内容
 	var_dump ($client->faceIdCardCompare('330782198802084329', '季锦锦', array('buffer'=>file_get_contents('F:\pic\idcard.jpg'))));
 ```
-		
-#### 3.3 人脸核身
 
+##### 活体检测
 ```php
 	//活体检测第一步：获取唇语（验证码）
 	$obj = $client->faceLiveGetFour();
