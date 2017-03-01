@@ -119,7 +119,7 @@
 	//创建一个Person, 使用图片内容
 	var_dump ($client->faceNewPerson('person3111', array('group11',), array('buffer'=>file_get_contents('F:\pic\zhao1.jpg'))));
 
-	//增加人脸,将一组Face加入到一个Person中。注意，一个Face只能被加入到一个Person中。 
+	//增加人脸,将一组Face加入到一个Person中。
 	//将单个或者多个Face的url加入到一个Person中
 	var_dump ($client->faceAddFace('person1111', array('urls'=>array('http://jiangsu.china.com.cn/uploadfile/2015/1102/1446443026382534.jpg',
 																	'http://n.sinaimg.cn/fashion/transform/20160704/flgG-fxtspsa6612705.jpg'))));
@@ -196,21 +196,29 @@
 
 ```php
 	//身份证url
-	var_dump ($client->faceIdCardCompare('330782198802084329', '季锦锦', array('url'=>'http://docs.ebdoor.com/Image/CompanyCertificate/1/16844.jpg')));
+	var_dump ($client->faceIdCardCompare('xxxxxxxxxxx', 'xxxxxxxxxxx', array('url'=>'http://docs.ebdoor.com/Image/CompanyCertificate/1/16844.jpg')));
 	//身份证文件file
-	var_dump ($client->faceIdCardCompare('330782198802084329', '季锦锦', array('file'=>'F:\pic\idcard.jpg')));
+	var_dump ($client->faceIdCardCompare('xxxxxxxxxxx', 'xxxxxxxxxxx', array('file'=>'F:\pic\idcard.jpg')));
 	//身份证文件内容
-	var_dump ($client->faceIdCardCompare('330782198802084329', '季锦锦', array('buffer'=>file_get_contents('F:\pic\idcard.jpg'))));
+	var_dump ($client->faceIdCardCompare('xxxxxxxxxxx', 'xxxxxxxxxxx', array('buffer'=>file_get_contents('F:\pic\idcard.jpg'))));
 ```
 
-##### 活体检测
+##### 活体检测—获取唇语验证码
+
 ```php
-	//活体检测第一步：获取唇语（验证码）
 	$obj = $client->faceLiveGetFour();
 	var_dump ($obj);
 	$validate_data = $obj['data']['validate_data'];
-	//活体检测第二步：检测
+```
+
+##### 活体检测-视频与用户照片的比对
+
+```php
 	var_dump ($client->faceLiveDetectFour($validate_data, array('file'=>'F:\pic\ZOE_0171.mp4'), False, array('F:\pic\idcard.jpg')));
-	//活体检测第二步：检测--对比指定身份信息
-	var_dump ($client->faceIdCardLiveDetectFour($validate_data, array('file'=>'F:\pic\ZOE_0171.mp4'), '330782198802084329', '季锦锦'));
+```
+
+##### 活体检测-视频与身份证高清照片的比对
+
+```php
+	var_dump ($client->faceIdCardLiveDetectFour($validate_data, array('file'=>'F:\pic\ZOE_0171.mp4'), 'xxxxxxxxxxx', 'xxxxxxxxxxx'));
 ```
