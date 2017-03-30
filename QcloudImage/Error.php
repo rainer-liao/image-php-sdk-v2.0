@@ -13,12 +13,12 @@ class Error {
 	 * Return false on fail.
      */
     public static function json($code, $message, $httpcode = 0) {
-		return array(
+		return json_encode(array(
 			'code' => $code,
 			'message' => $message,
 			'httpcode' => $httpcode,
 			'data' => json_decode('{}',true)
-		);
+		));
     }
 		
 	public static $Param = -1;

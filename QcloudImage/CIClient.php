@@ -1232,9 +1232,9 @@ class CIClient {
 		if ($json) {
 			$json['http_code'] = $this->http->statusCode();
 			return json_encode($json);
-		}
+		} 
 
-		return json_encode(Error::json(Error::$Network, "response is not json.", $this->http->statusCode()));
+		return Error::json(Error::$Network, "response is not json.", $this->http->statusCode());
     }
 
     private function baseHeaders() {
@@ -1250,37 +1250,6 @@ class CIClient {
             'bucket' => $this->bucket,
         );
     }
-    private function buildPostData($files, $picture) {
-        if (isset($picture['url'])) {
-            $files['url'] = $picture['url'];
-            return array(json_encode($files), NULL);
-        } else {
-            if (isset($picture['file'])) {
-                if(PATH_SEPARATOR==';'){    // WIN OS
-                    $path = iconv("UTF-8","gb2312//IGNORE",$picture['file']);
-                } else {
-                    $path = $picture['file'];
-                }
-                
-                $filePath = realpath($path);
-                if (! file_exists($filePath)) {
-                    return array(NUll, Error::json(Error::$FilePath, 'file '.$picture['file'].' not exist'));
-                }
-
-                if (function_exists('curl_file_create')) {
-                    $files['image'] = curl_file_create($filePath);
-                } else {
-                    $files['image'] = '@' . $filePath;
-                }
-            } else if (isset($picture['buffer'])) {
-                $files['image'] = $picture['buffer'];
-            } else {
-                return array(NULL, Error::json(Error::$Param, 'param picture is illegal'));
-            }
-            return array($files, NULL);
-        }
-    }
-
 
 	private $bucket;
 	private $auth;
