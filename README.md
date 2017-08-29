@@ -33,8 +33,8 @@
 
 ```php
 	//单个或多个图片Url
-	var_dump ($client->pornDetect(array('urls'=>array('http://img3.a0bi.com/upload/ttq/20160814/1471155260063.png',
-										"http://jiangsu.china.com.cn/uploadfile/2015/1102/1446443026382534.jpg"))));
+	var_dump ($client->pornDetect(array('urls'=>array('YOUR URL A',
+										'YOUR URL B'))));
 	//单个或多个图片File
 	var_dump ($client->pornDetect(array('files'=>array('F:\pic\你好.jpg','G:\pic\test2.jpg'))));
 ```
@@ -43,7 +43,7 @@
 
 ```php
 	//单个图片url
-	var_dump ($client->tagDetect(array('url'=>'http://img3.a0bi.com/upload/ttq/20160814/1471155260063.png')));
+	var_dump ($client->tagDetect(array('url'=>'YOUR URL')));
 	//单个图片file
 	var_dump ($client->tagDetect(array('file'=>'G:\pic\hot1.jpg')));
 	//单个图片内容
@@ -54,8 +54,8 @@
 
 ```php
 	//单个或多个图片Url,识别身份证正面
-	var_dump ($client->idcardDetect(array('urls'=>array('http://imgs.focus.cn/upload/sz/5876/a_58758051.jpg', 
-												'http://img5.iqilu.com/c/u/2013/0530/1369896921237.jpg')), 0));
+	var_dump ($client->idcardDetect(array('urls'=>array('YOUR URL A', 
+												'YOUR URL B')), 0));
 	//单个或多个图片file,识别身份证正面
 	var_dump ($client->idcardDetect(array('files'=>array('F:\pic\id6_zheng.jpg', 'F:\pic\id2_zheng.jpg')), 0));
 	//单个或多个图片内容,识别身份证正面
@@ -63,8 +63,8 @@
 																		file_get_contents('F:\pic\id2_zheng.jpg'))), 0));
 	
 	//单个或多个图片Url,识别身份证反面
-	var_dump ($client->idcardDetect(array('urls'=>array('http://www.csx.gov.cn/cwfw/bszn/201403/W020121030349825312574.jpg', 
-													'http://www.4009951551.com/upload/image/20151026/1445831136187479.png')), 1));
+	var_dump ($client->idcardDetect(array('urls'=>array('YOUR URL C', 
+													'YOUR URL D')), 1));
 	//单个或多个图片file,识别身份证反面
 	var_dump ($client->idcardDetect(array('files'=>array('F:\pic\id5_fan.jpg', 'F:\pic\id7_fan.png')), 1));
 	//单个或多个图片内容,识别身份证反面
@@ -75,8 +75,8 @@
 ##### OCR-名片识别	
 ```php
 	//单个或多个图片Url
-	var_dump ($client->namecardDetect(array('urls'=>array('http://pic1.nipic.com/2008-12-03/2008123181119306_2.jpg',
-														'http://pic.58pic.com/58pic/12/49/04/80k58PICzYP.jpg')), 0));
+	var_dump ($client->namecardDetect(array('urls'=>array('YOUR URL A',
+														'YOUR URL B')), 0));
 	//单个或多个图片file,
 	var_dump ($client->namecardDetect(array('files'=>array('F:\pic\r.jpg', 'F:\pic\name2.jpg')), 1));
 	//单个或多个图片内容
@@ -91,7 +91,7 @@
 
 ```php
 	//单个图片Url, mode:1为检测最大的人脸 , 0为检测所有人脸
-	var_dump ($client->faceDetect(array('url'=>'http://img3.a0bi.com/upload/ttq/20160814/1471155260063.png'), 1));
+	var_dump ($client->faceDetect(array('url'=>'YOUR URL'), 1));
 	//单个图片file,mode:1为检测最大的人脸 , 0为检测所有人脸
 	var_dump ($client->faceDetect(array('file'=>'F:\pic\face1.jpg'),0));
 	//单个图片内容,mode:1为检测最大的人脸 , 0为检测所有人脸
@@ -102,7 +102,7 @@
 
 ```php
 	//单个图片Url,mode:1为检测最大的人脸 , 0为检测所有人脸
-	var_dump ($client->faceShape(array('url'=>'http://img3.a0bi.com/upload/ttq/20160814/1471155260063.png'),1));
+	var_dump ($client->faceShape(array('url'=>'YOUR URL'),1));
 	//单个图片file,mode:1为检测最大的人脸 , 0为检测所有人脸
 	var_dump ($client->faceShape(array('file'=>'F:\pic\face1.jpg'),0));
 	//单个图片内容,mode:1为检测最大的人脸 , 0为检测所有人脸
@@ -113,7 +113,7 @@
 ```php
     //个体创建,创建一个Person，并将Person放置到group_ids指定的组当中，不存在的group_id会自动创建。
 	//创建一个Person, 使用图片url
-	var_dump ($client->faceNewPerson('person1111', array('group11',), array('url'=>'http://img3.a0bi.com/upload/ttq/20160814/1471155260063.png'), 'xiaoxin'));
+	var_dump ($client->faceNewPerson('person1111', array('group11',), array('url'=>'YOUR URL'), 'xiaoxin'));
 	//创建一个Person, 使用图片file
 	var_dump ($client->faceNewPerson('person2111', array('group11',), array('file'=>'F:\pic\hot1.jpg')));
 	//创建一个Person, 使用图片内容
@@ -121,8 +121,8 @@
 
 	//增加人脸,将一组Face加入到一个Person中。
 	//将单个或者多个Face的url加入到一个Person中
-	var_dump ($client->faceAddFace('person1111', array('urls'=>array('http://jiangsu.china.com.cn/uploadfile/2015/1102/1446443026382534.jpg',
-																	'http://n.sinaimg.cn/fashion/transform/20160704/flgG-fxtspsa6612705.jpg'))));
+	var_dump ($client->faceAddFace('person1111', array('urls'=>array('YOUR URL A',
+																	'YOUR URL B'))));
 	//将单个或者多个Face的file加入到一个Person中
 	var_dump ($client->faceAddFace('person2111', array('files'=>array('F:\pic\yang.jpg','F:\pic\yang2.jpg'))));
 	//将单个或者多个Face的文件内容加入到一个Person中
@@ -158,7 +158,7 @@
 
 ```php
 	//单个图片Url
-	var_dump ($client->faceVerify('person1', array('url'=>'http://img3.a0bi.com/upload/ttq/20160814/1471155260063.png')));
+	var_dump ($client->faceVerify('person1', array('url'=>'YOUR URL')));
 	//单个图片file
 	var_dump ($client->faceVerify('person3111', array('file'=>'F:\pic\yang3.jpg')));
 	//单个图片内容
@@ -170,7 +170,7 @@
 
 ```php
 	//单个文件url
-	var_dump ($client->faceIdentify('group1', array('url'=>'http://www.5djiaren.com/uploads/2016-07/22-141354_227.jpg')));
+	var_dump ($client->faceIdentify('group1', array('url'=>'YOUR URL')));
 	//单个文件file
 	var_dump ($client->faceIdentify('group11', array('file'=>'F:\pic\yang3.jpg')));
 	//单个文件内容
@@ -181,8 +181,8 @@
 
 ```php
 	//两个对比图片的文件url
-	var_dump ($client->faceCompare(array('url'=>"http://imgsrc.baidu.com/baike/pic/item/5fdf8db1cb134954a4d833a0534e9258d0094a34.jpg"),
-													array('url'=>'http://a-ssl.duitang.com/uploads/item/201610/29/20161029215753_5cMTX.jpeg')));
+	var_dump ($client->faceCompare(array('url'=>"YOUR URL A"),
+													array('url'=>'YOUR URL B')));
 	//两个对比图片的文件file
 	var_dump ($client->faceCompare(array('file'=>'F:\pic\yang.jpg'), array('file'=>'F:\pic\yang2.jpg')));
 	//两个对比图片的文件内容
@@ -196,7 +196,7 @@
 
 ```php
 	//身份证url
-	var_dump ($client->faceIdCardCompare('xxxxxxxxxxx', 'xxxxxxxxxxx', array('url'=>'http://docs.ebdoor.com/Image/CompanyCertificate/1/16844.jpg')));
+	var_dump ($client->faceIdCardCompare('xxxxxxxxxxx', 'xxxxxxxxxxx', array('url'=>'YOUR URL')));
 	//身份证文件file
 	var_dump ($client->faceIdCardCompare('xxxxxxxxxxx', 'xxxxxxxxxxx', array('file'=>'F:\pic\idcard.jpg')));
 	//身份证文件内容
