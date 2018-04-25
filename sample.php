@@ -47,6 +47,47 @@ var_dump ($client->namecardDetect(array('urls'=>array('YOUR URL A', 'YOUR URL B'
 var_dump ($client->namecardDetect(array('files'=>array('F:\pic\r.jpg', 'F:\pic\name2.jpg')), 1));
 //单个或多个图片内容
 var_dump ($client->namecardDetect(array('buffers'=>array(file_get_contents('F:\pic\name1.jpg'), file_get_contents('F:\pic\name2.jpg'))), 0));
+//行驶证驾驶证识别
+//单个或多个图片file
+var_dump ($client->drivingLicence(array('file'=>'F:\pic\r2.jpg'),1));
+//使用buffer
+var_dump ($client->drivingLicence(array('buffer'=>file_get_contents('F:\pic\r2.jpg')),1));
+//单个或多个图片Url
+var_dump ($client->drivingLicence(array('url'=>'YOUR URL'), 0));
+
+//车牌号识别
+//单个图片file
+var_dump ($client->plate(array('file'=>'F:\pic\chepaihao.jpg')));
+//单个图片的URL
+var_dump ($client->plate(array('url'=>'YOUR URL')));
+
+//银行卡识别
+//单个图片file
+var_dump ($client->bankcard(array('file'=>'F:\pic\yinhangka.jpg')));
+//使用buffer
+var_dump ($client->bankcard(array('buffer'=>file_get_contents('F:\pic\yinhangka.jpg'))));
+//单个图片的URL
+var_dump ($client->bankcard(array('url'=>'YOUR URL')));
+
+//营业执照识别
+//单个图片识别
+var_dump ($client->bizlicense(array('file'=>'F:\pic\yingyezhizhao.jpeg')));
+//使用buffer
+var_dump ($client->bizlicense(array('buffer'=>file_get_contents('F:\pic\yingyezhizhao.jpeg'))));
+//单个图片的URL
+var_dump ($client->bankcard(array('url'=>'YOUR URL')));
+
+//通用印刷体的识别
+//单个图片的识别
+var_dump ($client->general(array('file'=>'F:\pic\geneal2.PNG')));
+//单个图片的URL
+var_dump ($client->general(array('url'=>'YOUR URL')));
+
+//手写体识别
+//单个图片的识别
+var_dump ($client->general(array('file'=>'F:\pic\shouxieti.jpg')));
+//单个图片的URL
+var_dump ($client->general(array('url'=>'YOUR URL')));
 
 //人脸检测
 //单个图片Url, mode:1为检测最大的人脸 , 0为检测所有人脸
@@ -148,3 +189,20 @@ var_dump ($client->faceLiveDetectFour($validate_data, array('file'=>'F:\pic\ZOE_
 //活体检测第二步：检测--对比指定身份信息
 var_dump ($client->faceIdCardLiveDetectFour($validate_data, array('file'=>'F:\pic\ZOE_0171.mp4'), '330782198802084329', '季锦锦'));
 
+//人脸静态活体检测
+//使用image的检测
+var_dump ($client->liveDetectPicture(array('file'=>'F:\pic\face1.jpg'),'123456'));
+//使用buffer
+var_dump ($client->liveDetectPicture(array('buffer'=>file_get_contents('F:\pic\face1.jpg')),'123456'));
+//单个图片的URL
+var_dump ($client->liveDetectPicture(array('url'=>'YOUR URL'),'123456'));
+
+//多脸检索
+//使用 image 和 group_id 的请求
+var_dump ($client->multidentify(array('file'=>'F:\pic\r2.jpg'), array('group_id'=>'tencent')));
+//使用 image 和 group_ids 的请求
+var_dump ($client->multidentify(array('file'=>'F:\pic\face1.jpg'), array('group_ids'=>array("tencent","qq"))));
+//使用 url 和 group_id 的请求
+var_dump ($client->multidentify(array('url'=>'YOUR URL'), array('group_id'=>'tencent')));
+//使用 url 和 group_ids 的请求
+var_dump ($client->multidentify(array('url'=>'YOUR URL') , array('group_ids'=>array("tencent","qq"))));

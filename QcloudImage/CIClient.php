@@ -297,6 +297,357 @@ class CIClient {
 	}
 
     /**
+     * 行驶证驾驶证识别
+     * @param  array(associative) $picture   识别的图片
+     *                 * @param  array(associative) $pictures   证件的图片
+     *                  urls    array: 指定图片的url数组
+     *                  files   array: 指定图片的路径数组
+     *                  buffers array: 指定图片的内容
+     *                  以上三种指定其一即可，如果指定多个，则优先使用urls，其次 files，最后buffers
+     * @param type int 表示识别类型，0表示行驶证，1表示驾驶证
+     * @return array    http请求响应
+     */
+    public function drivingLicence($picture, $type=0){
+
+        if (!is_array($picture)) {
+            return Error::json(Error::$Param, 'param picture must be array');
+        }
+
+        if ($type !== 0 && $type !== 1) {
+            return Error::json(Error::$Param, 'param type error');
+        }
+
+        $reqUrl = $this->conf->buildUrl2('/ocr/drivinglicence');
+        $headers = $this->baseHeaders();
+        $files = $this->baseParams();
+        if (isset($picture['url'])) {
+            $headers[] = 'Content-Type:application/json';
+            $files['url'] = $picture['url'];
+            $files['type'] = $type;
+            $data = json_encode($files);
+        } else {
+            $files['type'] = strval($type);
+            if (isset($picture['file'])) {
+                if(PATH_SEPARATOR==';'){    // WIN OS
+                    $path = iconv("UTF-8","gb2312//IGNORE",$picture['file']);
+                } else {
+                    $path = $picture['file'];
+                }
+
+                $filePath = realpath($path);
+                if (! file_exists($filePath)) {
+                    return Error::json(Error::$FilePath, 'file '.$picture['file'].' not exist');
+                }
+
+                if (function_exists('curl_file_create')) {
+                    $files['image'] = curl_file_create($filePath);
+                } else {
+                    $files['image'] = '@' . $filePath;
+                }
+            } else if (isset($picture['buffer'])) {
+                $files['image'] = $picture['buffer'];
+            } else {
+                return Error::json(Error::$Param, 'param picture is illegal');
+            }
+            $data = $files;
+        }
+
+        return $this->doRequest(array(
+            'url' => $reqUrl,
+            'method' => 'POST',
+            'data' => $data,
+            'header' => $headers,
+            'timeout' => $this->conf->timeout()
+        ));
+    }
+
+    /**
+     * 车牌号识别
+     * @param  array(associative) $picture   识别的图片
+     *                 * @param  array(associative) $pictures   车牌号的图片
+     *                  urls    array: 指定图片的url数组
+     *                  files   array: 指定图片的路径数组
+     *                  buffers array: 指定图片的内容
+     *                  以上三种指定其一即可，如果指定多个，则优先使用urls，其次 files，最后buffers
+     * @return array    http请求响应
+     */
+    public function plate($picture){
+
+        if (! is_array($picture)) {
+            return Error::json(Error::$Param, 'param picture must be array');
+        }
+
+        $reqUrl = $this->conf->buildUrl2('/ocr/plate');
+        $headers = $this->baseHeaders();
+        $files = $this->baseParams();
+        if (isset($picture['url'])) {
+            $headers[] = 'Content-Type:application/json';
+            $files['url'] = $picture['url'];
+            $data = json_encode($files);
+        } else {
+            if (isset($picture['file'])) {
+                if(PATH_SEPARATOR==';'){    // WIN OS
+                    $path = iconv("UTF-8","gb2312//IGNORE",$picture['file']);
+                } else {
+                    $path = $picture['file'];
+                }
+
+                $filePath = realpath($path);
+                if (! file_exists($filePath)) {
+                    return Error::json(Error::$FilePath, 'file '.$picture['file'].' not exist');
+                }
+
+                if (function_exists('curl_file_create')) {
+                    $files['image'] = curl_file_create($filePath);
+                } else {
+                    $files['image'] = '@' . $filePath;
+                }
+            } else if (isset($picture['buffer'])) {
+                $files['image'] = $picture['buffer'];
+            } else {
+                return Error::json(Error::$Param, 'param picture is illegal');
+            }
+            $data = $files;
+        }
+
+        return $this->doRequest(array(
+            'url' => $reqUrl,
+            'method' => 'POST',
+            'data' => $data,
+            'header' => $headers,
+            'timeout' => $this->conf->timeout()
+        ));
+    }
+
+    /**
+     * 银行卡识别
+     * @param  array(associative) $picture   识别的图片
+     *                 * @param  array(associative) $pictures   车牌号的图片
+     *                  urls    array: 指定图片的url数组
+     *                  files   array: 指定图片的路径数组
+     *                  buffers array: 指定图片的内容
+     *                  以上三种指定其一即可，如果指定多个，则优先使用urls，其次 files，最后buffers
+     * @return array    http请求响应
+     */
+    public function bankcard ($picture){
+
+        if (! is_array($picture)) {
+            return Error::json(Error::$Param, 'param picture must be array');
+        }
+
+        $reqUrl = $this->conf->buildUrl2('/ocr/bankcard');
+        $headers = $this->baseHeaders();
+        $files = $this->baseParams();
+        if (isset($picture['url'])) {
+            $headers[] = 'Content-Type:application/json';
+            $files['url'] = $picture['url'];
+            $data = json_encode($files);
+        } else {
+            if (isset($picture['file'])) {
+                if(PATH_SEPARATOR==';'){    // WIN OS
+                    $path = iconv("UTF-8","gb2312//IGNORE",$picture['file']);
+                } else {
+                    $path = $picture['file'];
+                }
+
+                $filePath = realpath($path);
+                if (! file_exists($filePath)) {
+                    return Error::json(Error::$FilePath, 'file '.$picture['file'].' not exist');
+                }
+
+                if (function_exists('curl_file_create')) {
+                    $files['image'] = curl_file_create($filePath);
+                } else {
+                    $files['image'] = '@' . $filePath;
+                }
+            } else if (isset($picture['buffer'])) {
+                $files['image'] = $picture['buffer'];
+            } else {
+                return Error::json(Error::$Param, 'param picture is illegal');
+            }
+            $data = $files;
+        }
+
+        return $this->doRequest(array(
+            'url' => $reqUrl,
+            'method' => 'POST',
+            'data' => $data,
+            'header' => $headers,
+            'timeout' => $this->conf->timeout()
+        ));
+    }
+
+    /**
+     * 营业执照识别
+     * @param  array(associative) $picture   识别的图片
+     *                 * @param  array(associative) $pictures   车牌号的图片
+     *                  urls    array: 指定图片的url数组
+     *                  以上三种指定其一即可，如果指定多个，则优先使用urls，其次 files
+     * @return array    http请求响应
+     */
+    public function bizlicense ($picture){
+
+        if (! is_array($picture)) {
+            return Error::json(Error::$Param, 'param picture must be array');
+        }
+
+        $reqUrl = $this->conf->buildUrl2('/ocr/bizlicense');
+        $headers = $this->baseHeaders();
+        $files = $this->baseParams();
+        if (isset($picture['url'])) {
+            $headers[] = 'Content-Type:application/json';
+            $files['url'] = $picture['url'];
+            $data = json_encode($files);
+        } else {
+            if (isset($picture['file'])) {
+                if(PATH_SEPARATOR==';'){    // WIN OS
+                    $path = iconv("UTF-8","gb2312//IGNORE",$picture['file']);
+                } else {
+                    $path = $picture['file'];
+                }
+
+                $filePath = realpath($path);
+                if (! file_exists($filePath)) {
+                    return Error::json(Error::$FilePath, 'file '.$picture['file'].' not exist');
+                }
+
+                if (function_exists('curl_file_create')) {
+                    $files['image'] = curl_file_create($filePath);
+                } else {
+                    $files['image'] = '@' . $filePath;
+                }
+            } else if (isset($picture['buffer'])) {
+                $files['image'] = $picture['buffer'];
+            } else {
+                return Error::json(Error::$Param, 'param picture is illegal');
+            }
+            $data = $files;
+        }
+
+        return $this->doRequest(array(
+            'url' => $reqUrl,
+            'method' => 'POST',
+            'data' => $data,
+            'header' => $headers,
+            'timeout' => $this->conf->timeout()
+        ));
+    }
+
+    /**
+     * 通用印刷体识别
+     * @param  array(associative) $picture   识别的图片
+     *                 * @param  array(associative) $pictures   车牌号的图片
+     *                  urls    array: 指定图片的url数组
+     *                  files   array: 指定图片的路径数组
+     *                  以上三种指定其一即可，如果指定多个，则优先使用urls，其次 files
+     * @return array    http请求响应
+     */
+    public function general ($picture){
+
+        if (! is_array($picture)) {
+            return Error::json(Error::$Param, 'param picture must be array');
+        }
+
+        $reqUrl = $this->conf->buildUrl2('/ocr/general');
+        $headers = $this->baseHeaders();
+        $files = $this->baseParams();
+        if (isset($picture['url'])) {
+            $headers[] = 'Content-Type:application/json';
+            $files['url'] = $picture['url'];
+            $data = json_encode($files);
+        } else {
+            if (isset($picture['file'])) {
+                if(PATH_SEPARATOR==';'){    // WIN OS
+                    $path = iconv("UTF-8","gb2312//IGNORE",$picture['file']);
+                } else {
+                    $path = $picture['file'];
+                }
+
+                $filePath = realpath($path);
+                if (! file_exists($filePath)) {
+                    return Error::json(Error::$FilePath, 'file '.$picture['file'].' not exist');
+                }
+
+                if (function_exists('curl_file_create')) {
+                    $files['image'] = curl_file_create($filePath);
+                } else {
+                    $files['image'] = '@' . $filePath;
+                }
+            } else if (isset($picture['buffer'])) {
+                $files['image'] = $picture['buffer'];
+            } else {
+                return Error::json(Error::$Param, 'param picture is illegal');
+            }
+            $data = $files;
+        }
+
+        return $this->doRequest(array(
+            'url' => $reqUrl,
+            'method' => 'POST',
+            'data' => $data,
+            'header' => $headers,
+            'timeout' => $this->conf->timeout()
+        ));
+    }
+
+    /**
+     * 手写体识别
+     * @param  array(associative) $picture   识别的图片
+     *                 * @param  array(associative) $pictures   车牌号的图片
+     *                  urls    array: 指定图片的url数组
+     *                  files   array: 指定图片的路径数组
+     *                  以上三种指定其一即可，如果指定多个，则优先使用urls，其次 files
+     * @return array    http请求响应
+     */
+    public function handwriting ($picture){
+
+        if (! is_array($picture)) {
+            return Error::json(Error::$Param, 'param picture must be array');
+        }
+
+        $reqUrl = $this->conf->buildUrl2('/ocr/handwriting');
+        $headers = $this->baseHeaders();
+        $files = $this->baseParams();
+        if (isset($picture['url'])) {
+            $headers[] = 'Content-Type:application/json';
+            $files['url'] = $picture['url'];
+            $data = json_encode($files);
+        } else {
+            if (isset($picture['file'])) {
+                if(PATH_SEPARATOR==';'){    // WIN OS
+                    $path = iconv("UTF-8","gb2312//IGNORE",$picture['file']);
+                } else {
+                    $path = $picture['file'];
+                }
+
+                $filePath = realpath($path);
+                if (! file_exists($filePath)) {
+                    return Error::json(Error::$FilePath, 'file '.$picture['file'].' not exist');
+                }
+
+                if (function_exists('curl_file_create')) {
+                    $files['image'] = curl_file_create($filePath);
+                } else {
+                    $files['image'] = '@' . $filePath;
+                }
+            } else if (isset($picture['buffer'])) {
+                $files['image'] = $picture['buffer'];
+            } else {
+                return Error::json(Error::$Param, 'param picture is illegal');
+            }
+            $data = $files;
+        }
+
+        return $this->doRequest(array(
+            'url' => $reqUrl,
+            'method' => 'POST',
+            'data' => $data,
+            'header' => $headers,
+            'timeout' => $this->conf->timeout()
+        ));
+    }
+
+    /**
      * 创建Person
      * @param  string $personId  创建的Person的ID
      * @param  array  $groupIds  创建的Person需要加入的Group
@@ -971,6 +1322,148 @@ class CIClient {
             'timeout' => $this->conf->timeout()
         ));
 	}
+
+    /**
+     * 多脸检索
+     * @param  array(associative) $picture   人脸图片
+     *                  url    string: 指定图片的url
+     *                  file   string: 指定图片的路径
+     *                  以上三种指定其一即可，如果指定多个，则优先使用url，其次 file
+     * @param  array  $idtype  group_id:单个id，group_ids：多个id
+     *
+     * @return array    http请求响应
+     */
+    public function multidentify($picture, $idtype){
+
+        if (!$picture || !is_array($picture)) {
+            return Error::json(Error::$Param, 'param picture must be array');
+        }
+
+        $reqUrl = $this->conf->buildUrl2('/face/multidentify');
+        $headers = $this->baseHeaders();
+        $files = $this->baseParams();
+
+        if (isset($picture['url'])) {   //url
+            $headers[] = 'Content-Type:application/json';
+            $files['url'] = $picture['url'];
+
+            if (isset($idtype['group_id'])) {
+                $files['group_id'] = $idtype['group_id'];
+            } else if (isset($idtype['group_ids'])) {
+                $files['group_ids'] = $idtype['group_ids'];
+            } else {
+                return Error::json(Error::$Param, 'param idtype is illegal');
+            }
+        } else if (isset($picture['file'])) {
+            $headers[] = 'Content-Type:multipart/form-data';
+            if(PATH_SEPARATOR==';') {    // WIN OS
+                $path = iconv("UTF-8","gb2312//IGNORE",$picture['file']);
+            } else {
+                $path = $picture['file'];
+            }
+
+            $filePath = realpath($path);
+            if (! file_exists($filePath)) {
+                return Error::json(Error::$FilePath, 'file '.$picture['file'].' not exist');
+            }
+
+            if (function_exists('curl_file_create')) {
+                $files["image"] = curl_file_create($filePath);
+            } else {
+                $files["image"] = '@'.($filePath);
+            }
+
+            if (isset($idtype['group_id'])) {
+                $files['group_id'] = $idtype['group_id'];
+            } else if (isset($idtype['group_ids'])) {
+                if(!isset($picture['url'])){
+                    $index = 0;
+
+                    foreach ($idtype['group_ids'] as $id) {
+                        $files["group_ids[$index]"] = $id;
+                        $index++;
+                    }
+                }
+
+            } else {
+                return Error::json(Error::$Param, 'param idtype is illegal');
+            }
+        } else if (isset($picture['buffer'])) {
+            $files['image'] = $picture['buffer'];
+        } else {
+            return Error::json(Error::$Param, 'param picture is illegal');
+        }
+
+
+        if(isset($picture['url'])){
+            $data = json_encode($files);
+        }else if(isset($picture['file'])){
+            $data = $files;
+        }
+
+        return $this->doRequest(array(
+            'url' => $reqUrl,
+            'method' => 'POST',
+            'data' => $data,
+            'header' => $headers,
+            'timeout' => $this->conf->timeout()
+        ));
+    }
+
+    /**
+     * 人脸静态活体检测
+     * @param  array(associative) $picture   人脸图片
+     *                  url    string: 指定图片的url
+     *                  file   string: 指定图片的路径
+     *                  buffer string: 指定图片的内容
+     *                  以上三种指定其一即可，如果指定多个，则优先使用url，其次 file，再次 buffer。
+     * @param  int  $mode  检测模式，0为检测所有人脸，1为检测最大的人脸
+     *
+     * @return array    http请求响应
+     */
+    public function liveDetectPicture ($picture, $sign) {
+
+        if (!$picture || !is_array($picture)) {
+            return Error::json(Error::$Param, 'param picture must be array');
+        }
+
+        $reqUrl = $this->conf->buildUrl('/face/livedetectpicture');
+        $headers = $this->baseHeaders();
+        $headers[] = 'Content-Type:application/json';
+        $files = $this->baseParams();
+
+        if (isset($picture['url'])) {
+            $files['url'] = $picture['url'];
+            $files['sign'] = $sign;
+        } else if (isset($picture['file'])) {
+            $files['sign'] = $sign;
+            if(PATH_SEPARATOR==';') {    // WIN OS
+                $path = iconv("UTF-8","gb2312//IGNORE",$picture['file']);
+            } else {
+                $path = $picture['file'];
+            }
+
+            $filePath = realpath($path);
+            if (! file_exists($filePath)) {
+                return Error::json(Error::$FilePath, 'file '.$picture['file'].' not exist');
+            }
+
+            $files['image'] = base64_encode(file_get_contents($filePath));
+        } else if (isset($picture['buffer'])) {
+            $files['image'] = base64_encode($picture['buffer']);
+        } else {
+            return Error::json(Error::$Param, 'param picture is illegal');
+        }
+
+        $data = json_encode($files);
+        return $this->doRequest(array(
+            'url' => $reqUrl,
+            'method' => 'POST',
+            'data' => $data,
+            'header' => $headers,
+            'timeout' => $this->conf->timeout()
+        ));
+    }
 
     /**
      * 检测图片中的人和给定的信息是否匹配

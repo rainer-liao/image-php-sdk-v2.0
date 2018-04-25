@@ -11,6 +11,8 @@ class Conf {
     private static $VERSION = '1.0.0';
     private static $SERVER_ADDR = 'service.image.myqcloud.com';
     private static $HEADER_HOST = 'service.image.myqcloud.com';
+    private static $SERVER_ADDR2 = 'recognition.image.myqcloud.com';
+    private static $HEADER_HOST2 = 'recognition.image.myqcloud.com';
     private $REQ_TIMEOUT = 60;
     private $SCHEME = 'http';
     
@@ -35,6 +37,10 @@ class Conf {
 	public function buildUrl($uri) {
 		return $this->SCHEME.'://'.self::$SERVER_ADDR.'/'.ltrim($uri, "/");
 	}
+
+	public function buildUrl2($uri){
+        return $this->SCHEME.'://'.self::$SERVER_ADDR2.'/'.ltrim($uri, "/");
+    }
 	
 	public static function getUa($appid = null) {
 		$ua = 'CIPhpSDK/'.self::$VERSION.' ('.php_uname().')';
