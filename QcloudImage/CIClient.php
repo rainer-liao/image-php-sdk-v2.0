@@ -295,6 +295,76 @@ class CIClient {
 	        'timeout' => $this->conf->timeout()
 	    ));
 	}
+	
+	/**
+	 * 名片识别v2
+	 * @param  array(associative) $picture   识别的图片
+	 *                 * @param  array(associative) $pictures   Person的人脸图片
+	 *                  urls    array: 指定图片的url数组
+	 *                  files   array: 指定图片的路径数组
+	 *                  buffers array: 指定图片的内容
+	 *                  以上三种指定其一即可，如果指定多个，则优先使用urls，其次 files，最后buffers
+	 * @return array    http请求响应
+	 */
+	public function namecardV2Detect($picture) {
+	
+	    if (!$picture || !is_array($picture)) {
+	        return Error::json(Error::$Param, 'param picture must be array');
+	    }
+	
+	    $headers = $this->baseHeaders();
+	    $files = $this->baseParams();
+	    if (isset($picture['urls'])) {
+	        $headers[] = 'Content-Type:application/json';
+	        $files['url_list'] = $picture['urls'];
+	
+	        $data = json_encode($files);
+	    } else if (isset($picture['files'])){
+	        $index = 0;
+	
+	        foreach ($picture['files'] as $file) {
+	            if(PATH_SEPARATOR==';'){    // WIN OS
+	                $path = iconv("UTF-8","gb2312//IGNORE",$file);
+	            } else {
+	                $path = $file;
+	            }
+	            
+	            $path = realpath($path);
+	            if (!file_exists($path)) {
+	                return Error::json(Error::$FilePath, 'file '.$file.' not exist');
+	            }
+	
+	            if (function_exists('curl_file_create')) {
+	                $files["image[$index]"] = curl_file_create($path);
+	            } else {
+	                $files["image[$index]"] = '@'.($path);
+	            }
+	            $index++;
+	        }
+	
+	        $data = $files;
+	    } else if (isset($picture['buffers'])){
+	        $index = 0;
+	
+	        foreach ($picture['buffers'] as $buffer) {
+	            $files["image[$index]"] = $buffer;
+	             
+	            $index++;
+	        }
+	
+	        $data = $files;
+	    } else {
+	        return Error::json(Error::$Param, 'param picture is illegal');
+	    }
+	
+	    return $this->doRequest(array(
+	        'url' =>'http://recognition.image.myqcloud.com/ocr/businesscard',
+	        'method' => 'POST',
+	        'data' => $data,
+	        'header' => $headers,
+	        'timeout' => $this->conf->timeout()
+	    ));
+	}
 
     /**
      * 行驶证驾驶证识别

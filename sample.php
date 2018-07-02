@@ -47,6 +47,15 @@ var_dump ($client->namecardDetect(array('urls'=>array('YOUR URL A', 'YOUR URL B'
 var_dump ($client->namecardDetect(array('files'=>array('F:\pic\r.jpg', 'F:\pic\name2.jpg')), 1));
 //单个或多个图片内容
 var_dump ($client->namecardDetect(array('buffers'=>array(file_get_contents('F:\pic\name1.jpg'), file_get_contents('F:\pic\name2.jpg'))), 0));
+
+//名片识别v2
+//单个或多个图片Url
+var_dump ($client->namecardV2Detect(array('urls'=>array('YOUR URL A', 'YOUR URL B'))));
+//单个或多个图片file
+var_dump ($client->namecardV2Detect(array('files'=>array('F:\pic\jiashizheng.jpg', 'F:\pic\yingyezhizhao.jpeg'))));
+//单个或多个图片内容
+var_dump ($client->namecardV2Detect(array('buffers'=>array(file_get_contents('F:\pic\face1.jpg'), file_get_contents('F:\pic\face10.jpg')))));
+
 //行驶证驾驶证识别
 //单个或多个图片file
 var_dump ($client->drivingLicence(array('file'=>'F:\pic\r2.jpg'),1));
