@@ -1797,7 +1797,7 @@ class CIClient {
 			return json_encode($json);
 		} 
 
-		return Error::json(Error::$Network, "response is not json.", $this->http->statusCode());
+		return Error::json(Error::$Network, "response is not json: ".$result, $this->http->statusCode());
     }
 
     private function baseHeaders() {
