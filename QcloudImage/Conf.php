@@ -7,8 +7,8 @@ namespace QcloudImage;
 /**
  * Conf class.
  */
-class Conf {    
-    private static $VERSION = '1.0.0';
+class Conf {
+    const VERSION = '2.0.0';
     const SERVER_ADDR = 'service.image.myqcloud.com';
     const SERVER_ADDR2 = 'recognition.image.myqcloud.com';
 
@@ -46,7 +46,7 @@ class Conf {
 	}
 
 	public static function getUa($appid = null) {
-		$ua = 'CIPhpSDK/'.self::$VERSION.' ('.php_uname().')';
+		$ua = 'CIPhpSDK/'.self::VERSION.' ('.php_uname().')';
 		if ($appid) {
 			$ua .= " User($appid)";
 		}
