@@ -11,9 +11,17 @@ function my_curl_reset($handler) {
     curl_setopt($handler, CURLOPT_TIMEOUT, 0);
     curl_setopt($handler, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($handler, CURLOPT_SSL_VERIFYHOST, 0);
+    curl_setopt($handler, CURLOPT_PROXY, null);
 }
 
 class HttpClient {
+
+    private $proxy = '';
+
+    public function setProxy($proxy)
+    {
+        $this->proxy = $proxy;
+    }
 
 	public function __destory() {
 		if ($this->curlHandler) {
@@ -67,6 +75,13 @@ class HttpClient {
 
         isset($request['host']) && $header[] = 'Host:' . $request['host'];
         curl_setopt($this->curlHandler, CURLOPT_HTTPHEADER, $header);
+
+        if (empty($this->proxy)) {
+            curl_setopt($this->curlHandler, CURLOPT_PROXY, null);
+        } else {
+            curl_setopt($this->curlHandler, CURLOPT_PROXY, $this->proxy);
+        }
+        
         curl_setopt($this->curlHandler, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($this->curlHandler, CURLOPT_CUSTOMREQUEST, $method);
         isset($request['timeout']) && curl_setopt($this->curlHandler, CURLOPT_TIMEOUT, $request['timeout']);

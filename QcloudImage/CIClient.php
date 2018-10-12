@@ -53,6 +53,10 @@ class CIClient {
         $this->conf->useOldDomain();
     }
 
+    public function setProxy($proxy)
+    {
+        $this->http->setProxy($proxy);
+    }
 	
 	/**
 	 * 黄图识别

@@ -22,6 +22,10 @@ $client->setTimeout(30);
 //      2.并且是通过旧域名访问的
 // 那么: 请继续使用旧域名
 $client->useNewDomain();
+
+//根据你的网络环境, 可能需要设置代理
+$client->setProxy('127.0.0.1:12759');
+
 //图片鉴黄
 //单个或多个图片Url
 var_dump ($client->pornDetect(array('urls'=>array('YOUR URL A','YOUR URL B'))));
