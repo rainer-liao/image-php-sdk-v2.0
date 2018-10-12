@@ -271,7 +271,7 @@ class CIClient {
 	    if (!$picture || !is_array($picture)) {
 	        return Error::json(Error::$Param, 'param picture must be array');
 	    }
-	
+        $reqUrl = $this->conf->buildUrl('/ocr/businesscard');
 	    $headers = $this->baseHeaders();
 	    $files = $this->baseParams();
 	    if (isset($picture['urls'])) {
@@ -318,7 +318,7 @@ class CIClient {
 	    }
 	
 	    return $this->doRequest(array(
-	        'url' =>'http://recognition.image.myqcloud.com/ocr/businesscard',
+	        'url' => $reqUrl,
 	        'method' => 'POST',
 	        'data' => $data,
 	        'header' => $headers,
