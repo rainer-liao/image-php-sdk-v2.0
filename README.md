@@ -1,5 +1,5 @@
 # tencentyun/image-php-sdk-v2.0
-腾讯云 [万象优图（Cloud Image）](https://www.qcloud.com/product/ci) SDK for PHP
+[腾讯云](https://cloud.tencent.com) 云智AI应用服务智能图像 SDK for PHP
 
 ## 安装（直接下载源码集成）
 ### 直接下载源码集成
