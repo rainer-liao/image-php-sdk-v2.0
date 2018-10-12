@@ -29,106 +29,99 @@ $client->useNewDomain();
 
 //图片鉴黄
 //单个或多个图片Url
-var_dump ($client->pornDetect(array('urls'=>array('YOUR URL A','YOUR URL B'))));
+var_dump ($client->pornDetect(array('urls'=>array('http://open.youtu.qq.com./static/img/image_porn04.87591fe.jpg'))));
 //单个或多个图片File
-var_dump ($client->pornDetect(array('files'=>array('F:\pic\你好.jpg','G:\pic\test2.jpg'))));
+var_dump ($client->pornDetect(array('files'=>array('assets/icon_porn04.jpg'))));
 
 //图片标签
 //单个图片url
-var_dump ($client->tagDetect(array('url'=>'YOUR URL')));
+var_dump ($client->tagDetect(array('url'=>'http://open.youtu.qq.com./static/img/imag_02.f43527f.jpg')));
 //单个图片file
-var_dump ($client->tagDetect(array('file'=>'G:\pic\hot1.jpg')));
+var_dump ($client->tagDetect(array('file'=>'assets/icon_imag_01.jpg')));
 //单个图片内容
-var_dump ($client->tagDetect(array('buffer'=>file_get_contents('G:\pic\hot1.jpg'))));
+var_dump ($client->tagDetect(array('buffer'=>file_get_contents('assets/icon_imag_01.jpg'))));
 
 //身份证识别
 //单个或多个图片Url,识别身份证正面
-var_dump ($client->idcardDetect(array('urls'=>array('YOUR URL A', 'YOUR URL B')), 0));
+var_dump ($client->idcardDetect(array('urls'=>array('http://open.youtu.qq.com./static/img/ocr_id_01.883a2df.jpg')), 0/*0为正面,1为反面*/));
 //单个或多个图片file,识别身份证正面
-var_dump ($client->idcardDetect(array('files'=>array('F:\pic\id6_zheng.jpg', 'F:\pic\id2_zheng.jpg')), 0));
+var_dump ($client->idcardDetect(array('files'=>array('assets/icon_id_01.jpg')), 0/*0为正面,1为反面*/));
 //单个或多个图片内容,识别身份证正面
-var_dump ($client->idcardDetect(array('buffers'=>array(file_get_contents('F:\pic\id6_zheng.jpg'), file_get_contents('F:\pic\id2_zheng.jpg'))), 0));
-
-//单个或多个图片Url,识别身份证反面
-var_dump ($client->idcardDetect(array('urls'=>array('YOUR URL A', 'YOUR URL B')), 1));
-//单个或多个图片file,识别身份证反面
-var_dump ($client->idcardDetect(array('files'=>array('F:\pic\id5_fan.jpg', 'F:\pic\id7_fan.png')), 1));
-//单个或多个图片内容,识别身份证反面
-var_dump ($client->idcardDetect(array('buffers'=>array(file_get_contents('F:\pic\id5_fan.jpg'), file_get_contents('F:\pic\id7_fan.png'))), 1));
+var_dump ($client->idcardDetect(array('buffers'=>array(file_get_contents('assets/icon_id_01.jpg'))), 0/*0为正面,1为反面*/));
 
 //名片识别v2
 //单个或多个图片Url
-var_dump ($client->namecardV2Detect(array('urls'=>array('YOUR URL A', 'YOUR URL B'))));
+var_dump ($client->namecardV2Detect(array('urls'=>array('http://open.youtu.qq.com/app/img/experience/char_general/ocr_namecard_01.jpg'))));
 //单个或多个图片file
-var_dump ($client->namecardV2Detect(array('files'=>array('F:\pic\jiashizheng.jpg', 'F:\pic\yingyezhizhao.jpeg'))));
+var_dump ($client->namecardV2Detect(array('files'=>array('assets/ocr_namecard_01.jpg'))));
 //单个或多个图片内容
-var_dump ($client->namecardV2Detect(array('buffers'=>array(file_get_contents('F:\pic\face1.jpg'), file_get_contents('F:\pic\face10.jpg')))));
+var_dump ($client->namecardV2Detect(array('buffers'=>array(file_get_contents('assets/ocr_namecard_01.jpg')))));
 
 //行驶证驾驶证识别
 //单个或多个图片file
-var_dump ($client->drivingLicence(array('file'=>'F:\pic\r2.jpg'),1));
+var_dump ($client->drivingLicence(array('file'=>'assets/icon_ocr_jsz_01.jpg'),1/*0表示行驶证，1表示驾驶证*/));
 //使用buffer
-var_dump ($client->drivingLicence(array('buffer'=>file_get_contents('F:\pic\r2.jpg')),1));
+var_dump ($client->drivingLicence(array('buffer'=>file_get_contents('assets/icon_ocr_jsz_01.jpg')),1/*0表示行驶证，1表示驾驶证*/));
 //单个或多个图片Url
-var_dump ($client->drivingLicence(array('url'=>'YOUR URL'), 0));
+var_dump ($client->drivingLicence(array('url'=>'http://open.youtu.qq.com./static/img/ocr_jsz_01.53c2885.jpg'), 1/*0表示行驶证，1表示驾驶证*/));
 
 //车牌号识别
 //单个图片file
-var_dump ($client->plate(array('file'=>'F:\pic\chepaihao.jpg')));
+var_dump ($client->plate(array('file'=>'assets/icon_ocr_license_3.jpg')));
 //单个图片的URL
-var_dump ($client->plate(array('url'=>'YOUR URL')));
+var_dump ($client->plate(array('url'=>'http://open.youtu.qq.com./static/img/ocr_license_01.d7ac40a.jpg')));
 
 //银行卡识别
 //单个图片file
-var_dump ($client->bankcard(array('file'=>'F:\pic\yinhangka.jpg')));
+var_dump ($client->bankcard(array('file'=>'assets/ocr_card_01.jpg')));
 //使用buffer
-var_dump ($client->bankcard(array('buffer'=>file_get_contents('F:\pic\yinhangka.jpg'))));
+var_dump ($client->bankcard(array('buffer'=>file_get_contents('assets/ocr_card_01.jpg'))));
 //单个图片的URL
-var_dump ($client->bankcard(array('url'=>'YOUR URL')));
+var_dump ($client->bankcard(array('url'=>'http://open.youtu.qq.com./static/img/ocr_card_01.dd4aada.jpg')));
 
 //营业执照识别
 //单个图片识别
-var_dump ($client->bizlicense(array('file'=>'F:\pic\yingyezhizhao.jpeg')));
+var_dump ($client->bizlicense(array('file'=>'assets/ocr_yyzz_02.jpg')));
 //使用buffer
-var_dump ($client->bizlicense(array('buffer'=>file_get_contents('F:\pic\yingyezhizhao.jpeg'))));
+var_dump ($client->bizlicense(array('buffer'=>file_get_contents('assets/ocr_yyzz_02.jpg'))));
 //单个图片的URL
-var_dump ($client->bankcard(array('url'=>'YOUR URL')));
+var_dump ($client->bizlicense(array('url'=>'http://open.youtu.qq.com./static/img/ocr_yyzz_01.1d874f9.jpg')));
 
 //通用印刷体的识别
 //单个图片的识别
-var_dump ($client->general(array('file'=>'F:\pic\geneal2.PNG')));
+var_dump ($client->general(array('file'=>'assets/ocr_common09.jpg')));
 //单个图片的URL
-var_dump ($client->general(array('url'=>'YOUR URL')));
+var_dump ($client->general(array('url'=>'http://open.youtu.qq.com/static/img/ocr_common05.df60ecc.jpg')));
 
 //手写体识别
 //单个图片的识别
-var_dump ($client->general(array('file'=>'F:\pic\shouxieti.jpg')));
+var_dump ($client->handwriting(array('file'=>'assets/ocr_hw_03.png')));
 //单个图片的URL
-var_dump ($client->general(array('url'=>'YOUR URL')));
+var_dump ($client->handwriting(array('url'=>'http://open.youtu.qq.com./static/img/ocr_hw_03.2174a0a.jpg')));
 
 //人脸检测
 //单个图片Url, mode:1为检测最大的人脸 , 0为检测所有人脸
-var_dump ($client->faceDetect(array('url'=>'YOUR URL'), 1));
+var_dump ($client->faceDetect(array('url'=>'https://open.youtu.qq.com/static/img/face_05.b64219d.jpg'), 0));
 //单个图片file,mode:1为检测最大的人脸 , 0为检测所有人脸
-var_dump ($client->faceDetect(array('file'=>'F:\pic\face1.jpg'),0));
+var_dump ($client->faceDetect(array('file'=>'assets/face_05.jpg'),0));
 //单个图片内容,mode:1为检测最大的人脸 , 0为检测所有人脸
-var_dump ($client->faceDetect(array('buffer'=>file_get_contents('F:\pic\face1.jpg')), 1));
+var_dump ($client->faceDetect(array('buffer'=>file_get_contents('assets/face_05.jpg')), 0));
 
 //五官定位
-//单个图片Url,检测最大的人脸
-var_dump ($client->faceShape(array('url'=>'YOUR URL'),1));
-//单个图片Url,检测所有人脸
-var_dump ($client->faceShape(array('file'=>'F:\pic\face1.jpg'),0));
-//单个图片Url,检测所有人脸
-var_dump ($client->faceShape(array('buffer'=>file_get_contents('F:\pic\face1.jpg')), 1));
+//单个图片Url,mode:1为检测最大的人脸 , 0为检测所有人脸
+var_dump ($client->faceShape(array('url'=>'https://open.youtu.qq.com/static/img/face_05.b64219d.jpg'),0));
+//单个图片Url,mode:1为检测最大的人脸 , 0为检测所有人脸
+var_dump ($client->faceShape(array('file'=>'assets/face_05.jpg'),0));
+//单个图片Url,mode:1为检测最大的人脸 , 0为检测所有人脸
+var_dump ($client->faceShape(array('buffer'=>file_get_contents('assets/face_05.jpg')), 0));
 
 
 //创建一个Person，并将Person放置到group_ids指定的组当中, 使用图片url
-var_dump ($client->faceNewPerson('person1111', array('group11',), array('url'=>'YOUR URL'), 'xiaoxin'));
+var_dump ($client->faceNewPerson('personId0', array('groupId0'), array('url'=>'http://open.youtu.qq.com./static/img/face_01.f0c4a0c.jpg'), 'personName0','personTag0'));
 //创建一个Person，并将Person放置到group_ids指定的组当中, 使用图片file
-var_dump ($client->faceNewPerson('person2111', array('group11',), array('file'=>'F:\pic\hot1.jpg')));
+var_dump ($client->faceNewPerson('personId1', array('groupId0'), array('file'=>'assets/face_02.jpg'), 'personName1', 'personTag1'));
 //创建一个Person，并将Person放置到group_ids指定的组当中, 使用图片内容
-var_dump ($client->faceNewPerson('person3111', array('group11',), array('buffer'=>file_get_contents('F:\pic\zhao1.jpg'))));
+var_dump ($client->faceNewPerson('personId2', array('groupId0'), array('buffer'=>file_get_contents('assets/icon_id_01.jpg')), 'personName2', 'personTag2'));
 
 
 //增加人脸,将单个或者多个Face的url加入到一个Person中.注意，一个Face只能被加入到一个Person中。 一个Person最多允许包含20个Face
