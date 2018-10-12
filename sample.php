@@ -56,14 +56,6 @@ var_dump ($client->idcardDetect(array('files'=>array('F:\pic\id5_fan.jpg', 'F:\p
 //单个或多个图片内容,识别身份证反面
 var_dump ($client->idcardDetect(array('buffers'=>array(file_get_contents('F:\pic\id5_fan.jpg'), file_get_contents('F:\pic\id7_fan.png'))), 1));
 
-//名片识别
-//单个或多个图片Url
-var_dump ($client->namecardDetect(array('urls'=>array('YOUR URL A', 'YOUR URL B')), 0));
-//单个或多个图片file,
-var_dump ($client->namecardDetect(array('files'=>array('F:\pic\r.jpg', 'F:\pic\name2.jpg')), 1));
-//单个或多个图片内容
-var_dump ($client->namecardDetect(array('buffers'=>array(file_get_contents('F:\pic\name1.jpg'), file_get_contents('F:\pic\name2.jpg'))), 0));
-
 //名片识别v2
 //单个或多个图片Url
 var_dump ($client->namecardV2Detect(array('urls'=>array('YOUR URL A', 'YOUR URL B'))));
