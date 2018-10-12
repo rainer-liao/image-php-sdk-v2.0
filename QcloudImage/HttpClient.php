@@ -67,7 +67,6 @@ class HttpClient {
         }
 
         $header = isset($request['header']) ? $request['header'] : array();
-        $header[] = 'Method:'.$method;
         $header[] = 'Connection: keep-alive';
         if ('POST' == $method) {
             $header[] = 'Expect: ';

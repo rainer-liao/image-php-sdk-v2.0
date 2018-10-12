@@ -17,15 +17,21 @@ class CIClient {
 		$this->http = new HttpClient();
 		$this->conf = new Conf();
 	}
-	public function useHttp() {
-		return $this->conf->useHttp();
-	}
-	public function useHttps() {
-		return $this->conf->useHttps();
-	}
-	public function setTimeout($timeout) {
-		return $this->conf->setTimeout($timeout);
-	}
+
+    public function useHttp()
+    {
+        $this->conf->useHttp();
+    }
+
+    public function useHttps()
+    {
+        $this->conf->useHttps();
+    }
+
+    public function setTimeout($timeout)
+    {
+        $this->conf->setTimeout($timeout);
+    }
 
     /**
      * 使用新服务器域名 recognition.image.myqcloud.com<br>
