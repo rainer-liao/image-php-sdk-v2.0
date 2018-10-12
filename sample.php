@@ -9,6 +9,10 @@ $secretKey = 'YOUR_SECRETKEY';
 $bucket = 'YOUR_BUCKET';
 
 $client = new CIClient($appid, $secretId, $secretKey, $bucket);
+
+//推荐使用https
+$client->useHttps();
+
 $client->setTimeout(30);
 
 // 选择服务器域名, 推荐使用新域名 useNewDomain ( recognition.image.myqcloud.com )

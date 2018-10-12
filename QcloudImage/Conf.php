@@ -14,7 +14,7 @@ class Conf {
 
     private $HOST = self::SERVER_ADDR2;
     private $REQ_TIMEOUT = 60;
-    private $SCHEME = 'http';
+    private $SCHEME = 'https';
     
 	public function useHttp() {
 		$this->SCHEME = 'http';
