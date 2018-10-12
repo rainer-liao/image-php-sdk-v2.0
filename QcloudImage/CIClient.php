@@ -26,6 +26,33 @@ class CIClient {
 	public function setTimeout($timeout) {
 		return $this->conf->setTimeout($timeout);
 	}
+
+    /**
+     * 使用新服务器域名 recognition.image.myqcloud.com<br>
+     * <br>
+     * 如果你:<br>
+     * 1.正在使用人脸识别系列功能( https://cloud.tencent.com/product/FaceRecognition/developer )<br>
+     * 2.并且是通过旧域名访问的<br>
+     * 那么: 请继续使用旧域名
+     */
+    public function useNewDomain()
+    {
+        $this->conf->useNewDomain();
+    }
+
+    /**
+     * 使用旧服务器域名 recognition.image.myqcloud.com<br>
+     * <br>
+     * 如果你:<br>
+     * 1.正在使用人脸识别系列功能( https://cloud.tencent.com/product/FaceRecognition/developer )<br>
+     * 2.并且是通过旧域名访问的<br>
+     * 那么: 请继续使用旧域名
+     */
+    public function useOldDomain()
+    {
+        $this->conf->useOldDomain();
+    }
+
 	
 	/**
 	 * 黄图识别
@@ -387,7 +414,7 @@ class CIClient {
             return Error::json(Error::$Param, 'param type error');
         }
 
-        $reqUrl = $this->conf->buildUrl2('/ocr/drivinglicence');
+        $reqUrl = $this->conf->buildUrl('/ocr/drivinglicence');
         $headers = $this->baseHeaders();
         $files = $this->baseParams();
         if (isset($picture['url'])) {
@@ -447,7 +474,7 @@ class CIClient {
             return Error::json(Error::$Param, 'param picture must be array');
         }
 
-        $reqUrl = $this->conf->buildUrl2('/ocr/plate');
+        $reqUrl = $this->conf->buildUrl('/ocr/plate');
         $headers = $this->baseHeaders();
         $files = $this->baseParams();
         if (isset($picture['url'])) {
@@ -505,7 +532,7 @@ class CIClient {
             return Error::json(Error::$Param, 'param picture must be array');
         }
 
-        $reqUrl = $this->conf->buildUrl2('/ocr/bankcard');
+        $reqUrl = $this->conf->buildUrl('/ocr/bankcard');
         $headers = $this->baseHeaders();
         $files = $this->baseParams();
         if (isset($picture['url'])) {
@@ -561,7 +588,7 @@ class CIClient {
             return Error::json(Error::$Param, 'param picture must be array');
         }
 
-        $reqUrl = $this->conf->buildUrl2('/ocr/bizlicense');
+        $reqUrl = $this->conf->buildUrl('/ocr/bizlicense');
         $headers = $this->baseHeaders();
         $files = $this->baseParams();
         if (isset($picture['url'])) {
@@ -618,7 +645,7 @@ class CIClient {
             return Error::json(Error::$Param, 'param picture must be array');
         }
 
-        $reqUrl = $this->conf->buildUrl2('/ocr/general');
+        $reqUrl = $this->conf->buildUrl('/ocr/general');
         $headers = $this->baseHeaders();
         $files = $this->baseParams();
         if (isset($picture['url'])) {
@@ -675,7 +702,7 @@ class CIClient {
             return Error::json(Error::$Param, 'param picture must be array');
         }
 
-        $reqUrl = $this->conf->buildUrl2('/ocr/handwriting');
+        $reqUrl = $this->conf->buildUrl('/ocr/handwriting');
         $headers = $this->baseHeaders();
         $files = $this->baseParams();
         if (isset($picture['url'])) {
@@ -1409,7 +1436,7 @@ class CIClient {
             return Error::json(Error::$Param, 'param picture must be array');
         }
 
-        $reqUrl = $this->conf->buildUrl2('/face/multidentify');
+        $reqUrl = $this->conf->buildUrl('/face/multidentify');
         $headers = $this->baseHeaders();
         $files = $this->baseParams();
 
@@ -1802,7 +1829,6 @@ class CIClient {
 
     private function baseHeaders() {
         return array (
-            'Host:'.$this->conf->host(),
             'Authorization:'.$this->auth->getSign($this->bucket),
             'User-Agent:'.Conf::getUa($this->auth->getAppId()),
         );

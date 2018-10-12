@@ -9,10 +9,10 @@ namespace QcloudImage;
  */
 class Conf {    
     private static $VERSION = '1.0.0';
-    private static $SERVER_ADDR = 'service.image.myqcloud.com';
-    private static $HEADER_HOST = 'service.image.myqcloud.com';
-    private static $SERVER_ADDR2 = 'recognition.image.myqcloud.com';
-    private static $HEADER_HOST2 = 'recognition.image.myqcloud.com';
+    const SERVER_ADDR = 'service.image.myqcloud.com';
+    const SERVER_ADDR2 = 'recognition.image.myqcloud.com';
+
+    private $HOST = self::SERVER_ADDR2;
     private $REQ_TIMEOUT = 60;
     private $SCHEME = 'http';
     
@@ -27,21 +27,24 @@ class Conf {
 			$this->REQ_TIMEOUT = $timeout;
 		}
 	}
+
+    public function useNewDomain()
+    {
+        $this->HOST = self::SERVER_ADDR2;
+    }
+
+    public function useOldDomain()
+    {
+        $this->HOST = self::SERVER_ADDR;
+    }
 	public function timeout() {
 		return $this->REQ_TIMEOUT;
 	}
-	public function host() {
-		return self::$HEADER_HOST;
-	}
 	
 	public function buildUrl($uri) {
-		return $this->SCHEME.'://'.self::$SERVER_ADDR.'/'.ltrim($uri, "/");
+        return $this->SCHEME . '://' . $this->HOST . '/' . ltrim($uri, "/");
 	}
 
-	public function buildUrl2($uri){
-        return $this->SCHEME.'://'.self::$SERVER_ADDR2.'/'.ltrim($uri, "/");
-    }
-	
 	public static function getUa($appid = null) {
 		$ua = 'CIPhpSDK/'.self::$VERSION.' ('.php_uname().')';
 		if ($appid) {

@@ -11,6 +11,13 @@ $bucket = 'YOUR_BUCKET';
 $client = new CIClient($appid, $secretId, $secretKey, $bucket);
 $client->setTimeout(30);
 
+// 选择服务器域名, 推荐使用新域名 useNewDomain ( recognition.image.myqcloud.com )
+// 
+// 如果你:
+//      1.正在使用人脸识别系列功能( https://cloud.tencent.com/product/FaceRecognition/developer )
+//      2.并且是通过旧域名访问的
+// 那么: 请继续使用旧域名
+$client->useNewDomain();
 //图片鉴黄
 //单个或多个图片Url
 var_dump ($client->pornDetect(array('urls'=>array('YOUR URL A','YOUR URL B'))));
