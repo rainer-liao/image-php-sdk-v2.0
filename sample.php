@@ -24,7 +24,7 @@ $client->setTimeout(30);
 $client->useNewDomain();
 
 //根据你的网络环境, 可能需要设置代理
-$client->setProxy('127.0.0.1:12759');
+//$client->setProxy('127.0.0.1:12759');
 
 //图片鉴黄
 //单个或多个图片Url
