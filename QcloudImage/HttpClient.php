@@ -97,7 +97,7 @@ class HttpClient {
                 curl_setopt($this->curlHandler, CURLOPT_SSLVERSION, 4);
             }
         } else if ($ssl) {
-            curl_setopt($this->curlHandler, CURLOPT_SSL_VERIFYPEER,true);   //true any ca
+            curl_setopt($this->curlHandler, CURLOPT_SSL_VERIFYPEER,true);
             curl_setopt($this->curlHandler, CURLOPT_SSL_VERIFYHOST,2);
             if (isset($request['ssl_version'])) {
                 curl_setopt($this->curlHandler, CURLOPT_SSLVERSION, $request['ssl_version']);
