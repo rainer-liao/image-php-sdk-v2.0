@@ -8,7 +8,7 @@
 
 ### 1. 在腾讯云申请业务的授权
 授权包括：
-		
+​		
 	APP_ID 
 	SECRET_ID
 	SECRET_KEY
@@ -19,7 +19,7 @@
 
 	require_once __DIR__ . '/index.php';
 	use QcloudImage\CIClient;
-
+	
 	$client = new CIClient('APP_ID', 'SECRET_ID', 'SECRET_KEY', 'BUCKET');
 	$client->setTimeout(30);
 
@@ -27,7 +27,22 @@
 在创建完对象后，根据实际需求，调用对应的操作方法就可以了。sdk提供的方法包括：图片识别、人脸识别及人脸核身等。
 
 #### 3.1 图片识别
-图片识别包括：图片鉴黄、图片标签、OCR-身份证识别及OCR-名片识别。
+
+图片识别包括：
+
+图片鉴黄、图片标签;
+
+
+
+文字识别系列(OCR):
+
+身份证, 名片, 行驶证, 驾驶证, 车牌号, 银行卡, 营业执照, 印刷体, 手写体;
+
+
+
+人脸识别系列:
+
+人脸检测, 五官定位, 
 
 ##### 图片鉴黄
 
@@ -188,8 +203,8 @@
 	//两个对比图片的文件内容
 	var_dump ($client->faceCompare(array('file'=>'F:\pic\yang.jpg'), array('file'=>'F:\pic\yang2.jpg')));
 ```
-	
-		
+
+
 #### 3.3 人脸核身
 
 ##### 身份证识别对比
