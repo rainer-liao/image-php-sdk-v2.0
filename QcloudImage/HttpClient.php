@@ -106,7 +106,12 @@ class HttpClient {
             }
         }
         $ret = curl_exec($this->curlHandler);
+        $err = curl_error($this->curlHandler);
         $this->httpInfo = curl_getinfo($this->curlHandler);
+        if ($err) {
+            echo "cURL Error #:" . $err;
+            return $err;
+        }
         return $ret;
     }
 
