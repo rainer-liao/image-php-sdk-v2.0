@@ -1,7 +1,8 @@
 # tencentyun/image-php-sdk-v2.0
-[腾讯云](https://cloud.tencent.com) 云智AI应用服务智能图像 SDK for PHP
+[腾讯云](https://cloud.tencent.com) 人工智能图像识别 SDK for PHP
 
 ## 安装（直接下载源码集成）
+
 ### 直接下载源码集成
 从github下载源码，并加载image-php-sdk-v2.0/index.php就可以了。
 调用请参考sample.php
