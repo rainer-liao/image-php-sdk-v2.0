@@ -29,13 +29,13 @@ $client->useNewDomain();
 
 //图片鉴黄
 //单个或多个图片Url
-var_dump ($client->pornDetect(array('urls'=>array('http://open.youtu.qq.com./static/img/image_porn04.87591fe.jpg'))));
+var_dump ($client->pornDetect(array('urls'=>array('http://open.youtu.qq.com/static/img/image_porn04.87591fe.jpg'))));
 //单个或多个图片File
 var_dump ($client->pornDetect(array('files'=>array('assets/icon_porn04.jpg'))));
 
 //图片标签
 //单个图片url
-var_dump ($client->tagDetect(array('url'=>'http://open.youtu.qq.com./static/img/imag_02.f43527f.jpg')));
+var_dump ($client->tagDetect(array('url'=>'http://open.youtu.qq.com/static/img/imag_02.f43527f.jpg')));
 //单个图片file
 var_dump ($client->tagDetect(array('file'=>'assets/icon_imag_01.jpg')));
 //单个图片内容
@@ -43,7 +43,7 @@ var_dump ($client->tagDetect(array('buffer'=>file_get_contents('assets/icon_imag
 
 //身份证识别
 //单个或多个图片Url,识别身份证正面
-var_dump ($client->idcardDetect(array('urls'=>array('http://open.youtu.qq.com./static/img/ocr_id_01.883a2df.jpg')), 0/*0为正面,1为反面*/));
+var_dump ($client->idcardDetect(array('urls'=>array('http://open.youtu.qq.com/static/img/ocr_id_01.883a2df.jpg')), 0/*0为正面,1为反面*/));
 //单个或多个图片file,识别身份证正面
 var_dump ($client->idcardDetect(array('files'=>array('assets/icon_id_01.jpg')), 0/*0为正面,1为反面*/));
 //单个或多个图片内容,识别身份证正面
@@ -63,13 +63,13 @@ var_dump ($client->drivingLicence(array('file'=>'assets/icon_ocr_jsz_01.jpg'),1/
 //使用buffer
 var_dump ($client->drivingLicence(array('buffer'=>file_get_contents('assets/icon_ocr_jsz_01.jpg')),1/*0表示行驶证，1表示驾驶证*/));
 //单个或多个图片Url
-var_dump ($client->drivingLicence(array('url'=>'http://open.youtu.qq.com./static/img/ocr_jsz_01.53c2885.jpg'), 1/*0表示行驶证，1表示驾驶证*/));
+var_dump ($client->drivingLicence(array('url'=>'http://open.youtu.qq.com/static/img/ocr_jsz_01.53c2885.jpg'), 1/*0表示行驶证，1表示驾驶证*/));
 
 //车牌号识别
 //单个图片file
 var_dump ($client->plate(array('file'=>'assets/icon_ocr_license_3.jpg')));
 //单个图片的URL
-var_dump ($client->plate(array('url'=>'http://open.youtu.qq.com./static/img/ocr_license_01.d7ac40a.jpg')));
+var_dump ($client->plate(array('url'=>'http://open.youtu.qq.com/static/img/ocr_license_01.d7ac40a.jpg')));
 
 //银行卡识别
 //单个图片file
@@ -77,7 +77,7 @@ var_dump ($client->bankcard(array('file'=>'assets/ocr_card_01.jpg')));
 //使用buffer
 var_dump ($client->bankcard(array('buffer'=>file_get_contents('assets/ocr_card_01.jpg'))));
 //单个图片的URL
-var_dump ($client->bankcard(array('url'=>'http://open.youtu.qq.com./static/img/ocr_card_01.dd4aada.jpg')));
+var_dump ($client->bankcard(array('url'=>'http://open.youtu.qq.com/static/img/ocr_card_01.dd4aada.jpg')));
 
 //营业执照识别
 //单个图片识别
@@ -85,7 +85,7 @@ var_dump ($client->bizlicense(array('file'=>'assets/ocr_yyzz_02.jpg')));
 //使用buffer
 var_dump ($client->bizlicense(array('buffer'=>file_get_contents('assets/ocr_yyzz_02.jpg'))));
 //单个图片的URL
-var_dump ($client->bizlicense(array('url'=>'http://open.youtu.qq.com./static/img/ocr_yyzz_01.1d874f9.jpg')));
+var_dump ($client->bizlicense(array('url'=>'http://open.youtu.qq.com/static/img/ocr_yyzz_01.1d874f9.jpg')));
 
 //通用印刷体的识别
 //单个图片的识别
@@ -97,7 +97,7 @@ var_dump ($client->general(array('url'=>'http://open.youtu.qq.com/static/img/ocr
 //单个图片的识别
 var_dump ($client->handwriting(array('file'=>'assets/ocr_hw_03.png')));
 //单个图片的URL
-var_dump ($client->handwriting(array('url'=>'http://open.youtu.qq.com./static/img/ocr_hw_03.2174a0a.jpg')));
+var_dump ($client->handwriting(array('url'=>'http://open.youtu.qq.com/static/img/ocr_hw_03.2174a0a.jpg')));
 
 //人脸检测
 //单个图片Url, mode:1为检测最大的人脸 , 0为检测所有人脸
@@ -117,7 +117,7 @@ var_dump ($client->faceShape(array('buffer'=>file_get_contents('assets/face_05.j
 
 
 //创建一个Person，并将Person放置到group_ids指定的组当中, 使用图片url
-var_dump ($client->faceNewPerson('personId0', array('groupId0'), array('url'=>'http://open.youtu.qq.com./static/img/face_01.f0c4a0c.jpg'), 'personName0','personTag0'));
+var_dump ($client->faceNewPerson('personId0', array('groupId0'), array('url'=>'http://open.youtu.qq.com/static/img/face_01.f0c4a0c.jpg'), 'personName0','personTag0'));
 //创建一个Person，并将Person放置到group_ids指定的组当中, 使用图片file
 var_dump ($client->faceNewPerson('personId1', array('groupId0'), array('file'=>'assets/face_02.jpg'), 'personName1', 'personTag1'));
 //创建一个Person，并将Person放置到group_ids指定的组当中, 使用图片内容
